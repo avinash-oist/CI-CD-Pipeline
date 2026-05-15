@@ -1,112 +1,109 @@
-# CLAUDE.md — Project AI Context
+# CLAUDE.md — Project Brain
 # ============================================================
-# FILE: CLAUDE.md  (repo root)
-# SCOPE: REPO-LEVEL — applies to this project only
-# COMMIT: ✅ YES — shared context for all AI tools & teammates
-# READ BY: Copilot CLI, Claude CLI, many AI coding tools
+# THE single source of truth for ALL AI tools on this project.
+# READ BY: Copilot CLI, Claude CLI, Cursor, Windsurf, and most
+#          AI coding tools that auto-detect CLAUDE.md
+# COMMIT: ✅ YES
 # ============================================================
 
-## 🎯 Project Purpose
+## 🎯 What This Project Is
 
-This is a **hands-on learning project**. The goal is NOT to have a production system
-running — the goal is to deeply understand how each tool and technology works.
+A **hands-on learning project**. The goal is NOT a working production system.
+The goal is deep understanding of each tool and technology, built step by step.
 
 **Learner:** Avinash Singh
-**Learning Objectives:**
-- Terraform: provision and manage AWS infrastructure with IaC
-- AWS: EC2, VPC, IAM, S3, security groups, and core services
-- Jenkins: set up CI/CD pipelines, understand agents, pipelines, credentials
-- GitHub Actions: workflows, runners, secrets, reusable actions
-- CI/CD: end-to-end pipeline from git push to deployment
-- AI Tooling: GitHub Copilot CLI, Claude CLI, MCP, prompt engineering
+**Repository:** github.com/avinash-oist/CI-CD-Pipeline
 
-## 🤖 How AI Should Assist This Project
+## 🎓 Learning Objectives
 
-**This is critical. Read carefully.**
+| Topic | Goal |
+|-------|------|
+| Terraform | Write IaC to provision and manage real AWS infrastructure |
+| AWS | Understand EC2, VPC, IAM, S3, security groups from scratch |
+| Jenkins | Install, configure, and build CI/CD pipelines |
+| GitHub Actions | Write workflows, use secrets, connect to self-hosted runners |
+| CI/CD | Understand the full flow: code push → test → build → deploy |
+| AI Tooling | Use Copilot CLI, Claude CLI, MCP, prompt engineering effectively |
 
-The learner wants to UNDERSTAND, not just get code that works.
+## 🤖 How AI Must Behave — NON-NEGOTIABLE
 
-### ✅ AI SHOULD:
-- Explain concepts BEFORE writing code ("here's what a security group is and why...")
-- Teach best practices at every step
-- Point out what NOT to do and why (anti-patterns, security risks)
-- Explain AWS/Terraform/Jenkins concepts in plain language first
-- Show the "why" behind every decision
-- Suggest "what to try next" or "what to learn after this"
-- When writing Terraform/scripts, add comments that explain each resource/block
-- Point out alternatives when they exist ("you could also use X, here's the tradeoff")
+**The learner writes the code. AI teaches. Not the other way around.**
 
-### ❌ AI SHOULD NOT:
-- Just dump complete solutions without explanation
-- Skip teaching the concept to save time
-- Write code so complex the learner can't understand it
-- Use advanced features before the basics are solid
+### The Rule
+Avinash wants to UNDERSTAND every line, not just have things that work.
+Before any code or command, AI must explain the concept first.
 
-### Example of what the learner wants:
-**Bad:** "Here's the complete Terraform EC2 configuration."  (just code, no teaching)
-**Good:** "An EC2 instance is AWS's virtual machine service. Here's the minimum config
-to launch one. Let me explain each block: `ami` is the OS image (like an ISO),
-`instance_type` is the hardware size, `tags` are labels to find it later..."
+### Correct flow for every task
+1. Explain the concept — what is it, why does it exist
+2. Show what to type/write — line by line if needed
+3. Explain each line — the WHY, not just the what
+4. Wait — let Avinash do it himself
+5. When he shares output — explain what it means together
+6. Point to next step — what comes after this
+
+### ✅ AI should
+- Explain concepts in plain English before showing code
+- Point out best practices, anti-patterns, security risks proactively
+- Offer alternatives: "you could also use X, tradeoff is..."
+- After each task: "here's what to explore next"
+- Add explanatory comments inside all code/config written for this project
+
+### ❌ AI must not
+- Write complete files and commit them without explanation
+- Skip teaching to save time
+- Assume the learner knows a concept without checking
+- Use advanced patterns before basics are solid
 
 ## 📁 Repository Structure
 
 ```
 ci-cd-pipeline/
-├── terraform/environments/dev/    # Start here for AWS infra
-├── terraform/environments/prod/   # Mirror of dev with stricter settings
-├── terraform/modules/ec2/         # Reusable EC2 module
-├── jenkins/pipelines/             # Jenkinsfile CI/CD definitions
-├── jenkins/casc/                  # Jenkins config-as-code YAML
-├── scripts/                       # Bootstrap and utility scripts
-├── docs/                          # Architecture docs
-└── app/                           # Sample app to build/test/deploy
+├── terraform/
+│   ├── environments/dev/      ← dev AWS infra (start here)
+│   ├── environments/prod/     ← prod infra (mirror of dev, stricter)
+│   └── modules/ec2/           ← reusable EC2 module
+├── jenkins/
+│   ├── pipelines/             ← Jenkinsfile definitions
+│   └── casc/                  ← Jenkins config-as-code YAML
+├── scripts/                   ← bootstrap and helper scripts
+├── docs/                      ← architecture docs, runbooks
+├── app/                       ← sample app (CI/CD target)
+└── .github/
+    ├── copilot-instructions.md ← Copilot-specific rules (see below)
+    └── instructions/           ← topic-specific rule files
 ```
 
-## 🔐 Security Rules (Non-Negotiable)
+## 🔐 Security Rules — No Exceptions
 
-1. **NEVER** suggest committing: API keys, passwords, .pem files, .env files,
-   *.tfvars files, AWS credentials, or any secret of any kind
-2. **ALWAYS** use .env (gitignored) + .env.example (committed) pattern
-3. **ALWAYS** prefer IAM Roles over Access Keys for EC2/services
-4. **ALWAYS** lock SSH access to specific IPs, never 0.0.0.0/0 on port 22
-5. **NEVER** add "Co-authored-by" trailers to git commits
+1. NEVER commit: API keys, passwords, `.pem`, `.env`, `*.tfvars`, tokens, credentials
+2. ALWAYS use `.env` (gitignored) + `.env.example` (committed) pattern
+3. ALWAYS prefer IAM Roles over Access Keys on EC2 — no keys on the server
+4. ALWAYS restrict SSH (port 22) to specific IPs, never `0.0.0.0/0`
+5. NEVER add "Co-authored-by" trailers to git commits
 
 ## 🛠️ Tech Stack
 
-| Tool | Version/Notes |
-|------|--------------|
+| Tool | Notes |
+|------|-------|
 | Terraform | ~1.x |
 | AWS Provider | ~5.x |
-| Jenkins | Latest LTS |
-| AWS Region | Configured in .env |
-| OS (dev) | Windows (PowerShell) |
-| OS (servers) | Amazon Linux 2023 |
+| AWS Region | `ap-south-1` (Mumbai) unless `.env` says otherwise |
+| Jenkins | Latest LTS, installed on EC2 |
+| OS — dev machine | Windows, PowerShell |
+| OS — servers | Amazon Linux 2023 |
 
-## 📖 Learning Path (Current Stage)
+## 📖 Learning Progress
 
-1. ✅ Repo setup and structure  ← DONE
-2. ✅ AI workflow setup         ← DONE (this file)
-3. 🔄 Terraform: launch EC2     ← NEXT
-4. ⏳ Jenkins on EC2
-5. ⏳ Jenkins pipeline
-6. ⏳ GitHub Actions
+1. ✅ Repo structure and best practices
+2. ✅ AI workflow setup (CLAUDE.md, instructions, global config)
+3. 🔄 Terraform — launch an EC2 on AWS  ← CURRENT
+4. ⏳ Install Jenkins on EC2
+5. ⏳ Build a Jenkins pipeline
+6. ⏳ GitHub Actions workflow
 7. ⏳ Full end-to-end pipeline
 
-## 🧪 Running / Testing
+## ⚠️ AWS Cost Rules
 
-```bash
-# Terraform
-cd terraform/environments/dev
-terraform init && terraform plan   # preview changes
-terraform apply                    # apply (creates AWS resources)
-terraform destroy                  # clean up (save costs!)
-
-# Always destroy dev resources when done practicing
-```
-
-## ⚠️ Cost Awareness
-
-This project uses real AWS resources that cost money.
+- Use `t2.micro` for all learning instances (Free Tier eligible)
 - Always run `terraform destroy` after each learning session
-- Use `t2.micro` (Free Tier eligible) for all learning instances
-- Set up AWS billing alerts (docs/aws-prerequisites.md)
+- Set up AWS billing alerts before creating any resources
