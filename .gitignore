@@ -1,4 +1,21 @@
 # =============================================================
+# AI TOOLING — local/personal AI files (never commit)
+# =============================================================
+# Global Copilot CLI instructions live at ~/.copilot/ (off-repo)
+# These are local AI cache/workspace files that should NOT be committed:
+.aider*                 # Aider AI coding tool
+.continue/             # Continue VS Code extension
+.cursor/               # Cursor AI editor personal settings
+*.aicontext            # Generic AI context temp files
+
+# AI-generated files that should be reviewed before committing:
+# (These are here as a reminder — review before staging)
+# .github/copilot-instructions.md  → ✅ COMMIT (project rules)
+# CLAUDE.md                        → ✅ COMMIT (project context)
+# AGENTS.md                        → ✅ COMMIT (agent rules)
+# ~/.copilot/copilot-instructions.md → ❌ NEVER (lives outside repo)
+
+# =============================================================
 # SECRETS & CREDENTIALS  ← NEVER commit these!
 # =============================================================
 # Environment variables (real values live here, never committed)
