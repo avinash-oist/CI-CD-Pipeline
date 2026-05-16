@@ -107,3 +107,63 @@ ci-cd-pipeline/
 - Use `t2.micro` for all learning instances (Free Tier eligible)
 - Always run `terraform destroy` after each learning session
 - Set up AWS billing alerts before creating any resources
+
+## 💬 Code Comment Style
+
+Every code block written for this project needs teaching comments explaining WHY:
+
+```hcl
+# terraform block pins the minimum version so old Terraform versions
+# don't silently behave differently from what we expect.
+terraform {
+  required_version = ">= 1.0"
+
+  # required_providers tells Terraform which plugin (provider) to download.
+  # "aws" is the plugin that knows how to make AWS API calls.
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"  # ~> means "5.x but not 6.0" (pessimistic constraint)
+    }
+  }
+}
+```
+
+## 📝 Git Commit Format
+
+```
+<type>: <short description in present tense>
+
+Types: feat | fix | docs | refactor | chore | security
+Example: feat: add EC2 security group with SSH restriction
+```
+
+❌ NEVER add Co-authored-by lines. Not even once. Not for any AI tool.
+
+## 🏷️ Terraform Resource Tagging
+
+Every AWS resource must have these tags — non-negotiable:
+
+```hcl
+tags = {
+  Name        = "${var.environment}-ci-cd-pipeline-<resource-type>"
+  Environment = var.environment   # "dev" or "prod"
+  Project     = "ci-cd-pipeline"
+  ManagedBy   = "Terraform"
+}
+```
+
+## 🔒 Security Checklists
+
+**Before any `git commit`:**
+- No secrets, keys, or passwords in staged files
+- No `*.pem` or `*.key` files being committed
+- `.env` and `*.tfvars` are in `.gitignore`
+- Security groups don't open sensitive ports to `0.0.0.0/0`
+
+**Before any `terraform apply`:**
+- Review all security group ingress rules
+- IAM policies follow least privilege
+- Sensitive variables are marked `sensitive = true`
+- No hardcoded secrets in `*.tf` files
+- Confirm you are in the correct environment (dev vs prod)
