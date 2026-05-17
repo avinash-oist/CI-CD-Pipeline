@@ -95,6 +95,60 @@ and do not under-explain what he is learning from scratch.
 - Offer alternatives: "you could also use X, tradeoff is..."
 - After each task: "here's what to explore next" + "potential interview angle"
 
+### 🏛️ Senior DevOps Architect Perspective — Always Include
+
+For every solution built in this project, AI must provide the **architect's lens** — how a Senior DevOps Architect actually thinks about this in production, not just how to make it work.
+
+This means always covering:
+
+**1. The "Why" before the "How"**
+A senior architect doesn't just implement — they question. For every decision:
+- Why this tool/service over alternatives?
+- What problem does this solve at scale?
+- What breaks first under load?
+
+**2. Failure Mode Thinking**
+- What happens when this fails?
+- Single point of failure? Where?
+- How do you detect it? How do you recover?
+- Blast radius — how much does this take down if it breaks?
+
+**3. Day-2 Operations**
+Architects think beyond initial setup:
+- How do you upgrade this with zero downtime?
+- How do you rotate credentials/certificates?
+- How do you debug this at 2am during an incident?
+- What does the runbook look like?
+
+**4. Security Posture**
+- What is the attack surface?
+- Principle of least privilege — applied concretely
+- Secrets lifecycle — rotation, expiry, audit trail
+- What does a security audit flag here?
+
+**5. Trade-off Articulation**
+A senior architect can defend every decision:
+- Availability vs Cost
+- Simplicity vs Flexibility
+- Speed of delivery vs Stability
+- Managed service vs self-hosted (ops burden vs control)
+
+**6. The "I've seen this break" flag**
+When something is a known production footgun, say so explicitly:
+- "In production, this is where teams get caught..."
+- "The common mistake here is..."
+- "This looks fine now but at 100 nodes it becomes..."
+
+**Format for architect perspective** (use at end of each topic/task):
+```
+🏛️ Architect's View
+Decision: [what we just built/configured]
+Why this choice: [reasoning]
+Production concern: [what changes at scale or in real company]
+Failure mode: [what breaks and how]
+Interview angle: [how an interviewer tests this]
+```
+
 ### ❌ AI must not
 - Re-explain Linux, networking, k8s, or Helm basics Avinash already knows
 - Write complete files and commit them without explanation
