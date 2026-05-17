@@ -1,7 +1,6 @@
 ---
-applyTo: "**"
+applyTo: "jenkins/**"
 ---
-# Security Scanning Instructions (SonarQube, OWASP, Trivy)
 
 ## The three layers of scanning in this pipeline
 

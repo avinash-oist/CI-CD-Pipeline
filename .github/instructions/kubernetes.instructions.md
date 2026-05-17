@@ -1,7 +1,6 @@
 ---
-applyTo: "**"
+applyTo: "helm/**,app/**"
 ---
-# Kubernetes / EKS / Helm / ArgoCD Instructions
 
 ## Teaching checklist for k8s tasks
 1. Explain the k8s object (Pod / Deployment / Service / Ingress) before writing YAML
