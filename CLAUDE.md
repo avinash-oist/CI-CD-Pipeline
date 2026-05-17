@@ -83,24 +83,81 @@ ci-cd-pipeline/
 
 ## 🛠️ Tech Stack
 
+### Infrastructure & Cloud
+| Tool | Purpose |
+|------|---------|
+| AWS | Cloud provider (EC2, VPC, IAM, S3, ECR, EKS, CloudWatch) |
+| Terraform ~1.x | Provision all AWS infrastructure as code |
+| AWS Provider ~5.x | Terraform plugin for AWS |
+| AWS Region | `ap-south-1` (Mumbai) unless `.env` says otherwise |
+
+### Operating System & Networking
+| Tool | Purpose |
+|------|---------|
+| Amazon Linux 2023 | All servers (EC2, Jenkins, etc.) |
+| Linux | Core OS — shell, permissions, networking, processes |
+| VPC / Subnets / SGs | AWS networking layer for all resources |
+
+### CI/CD
+| Tool | Purpose |
+|------|---------|
+| Jenkins LTS | CI server — build, test, scan, push |
+| ArgoCD | CD / GitOps — deploy to Kubernetes from Git |
+
+### Code Quality & Security Scanning
+| Tool | Purpose |
+|------|---------|
+| SonarQube | Static code analysis — bugs, code smells, coverage |
+| OWASP Dependency Check | Scan dependencies for known CVEs |
+| Trivy | Container image and filesystem vulnerability scanner |
+
+### Containers & Kubernetes
+| Tool | Purpose |
+|------|---------|
+| Docker | Build and package application images |
+| ECR (Elastic Container Registry) | AWS-hosted Docker image registry |
+| EKS (Elastic Kubernetes Service) | Managed Kubernetes cluster on AWS |
+| Kubernetes (k8s) | Container orchestration |
+| Helm | Kubernetes package manager — templated deployments |
+
+### Monitoring & Observability
+| Tool | Purpose |
+|------|---------|
+| Prometheus | Metrics collection and alerting rules |
+| Grafana | Metrics dashboards and visualization |
+| CloudWatch | AWS-native monitoring, logs, and alarms |
+| EFK Stack | Logging: Elasticsearch + Fluentd + Kibana |
+
+### Dev Machine
 | Tool | Notes |
 |------|-------|
-| Terraform | ~1.x |
-| AWS Provider | ~5.x |
-| AWS Region | `ap-south-1` (Mumbai) unless `.env` says otherwise |
-| Jenkins | Latest LTS, installed on EC2 |
-| OS — dev machine | Windows, PowerShell |
-| OS — servers | Amazon Linux 2023 |
+| Windows + PowerShell | Local dev only — all servers are Linux |
 
-## 📖 Learning Progress
+### ❌ Not Used in This Project
+- GitHub Actions — Jenkins handles all CI/CD here
+- Windows on servers — Linux only
 
-1. ✅ Repo structure and best practices
-2. ✅ AI workflow setup (CLAUDE.md, instructions, global config)
-3. 🔄 Terraform — launch an EC2 on AWS  ← CURRENT
-4. ⏳ Install Jenkins on EC2
-5. ⏳ Build a Jenkins pipeline
-6. ⏳ GitHub Actions workflow
-7. ⏳ Full end-to-end pipeline
+## 📖 Learning Path
+
+| Step | Topic | Status |
+|------|-------|--------|
+| 1 | Repo structure and best practices | ✅ Done |
+| 2 | AI workflow setup | ✅ Done |
+| 3 | Terraform — VPC, EC2, networking on AWS | 🔄 Current |
+| 4 | Linux fundamentals — shell, permissions, networking | ⏳ |
+| 5 | Jenkins — install on EC2, configure | ⏳ |
+| 6 | Jenkins pipeline — stages, agents, credentials | ⏳ |
+| 7 | SonarQube — integrate code quality into pipeline | ⏳ |
+| 8 | OWASP + Trivy — security scanning in pipeline | ⏳ |
+| 9 | Docker — build images, Dockerfile best practices | ⏳ |
+| 10 | ECR — push images to AWS registry from Jenkins | ⏳ |
+| 11 | Kubernetes (EKS) — cluster setup, core concepts | ⏳ |
+| 12 | Helm — package and deploy apps to k8s | ⏳ |
+| 13 | ArgoCD — GitOps continuous delivery to EKS | ⏳ |
+| 14 | Prometheus + Grafana — metrics and dashboards | ⏳ |
+| 15 | CloudWatch — AWS-native monitoring and alarms | ⏳ |
+| 16 | EFK — centralized logging across the stack | ⏳ |
+| 17 | Full end-to-end pipeline: code → scan → build → deploy → monitor | ⏳ |
 
 ## ⚠️ AWS Cost Rules
 
