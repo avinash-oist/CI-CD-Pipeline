@@ -227,6 +227,38 @@ terraform destroy   ← MANDATORY — destroys all resources, stops all billing
 5. **Tag all resources** with `Environment = dev` → enables filtering in Cost Explorer
 6. **S3 Lifecycle rules** — Auto-delete Terraform state backup versions after 30 days
 
+### 🏭 Learning vs Production Comparison — Always Show This
+
+**Every time a new AWS resource or architecture decision is introduced, AI must show a side-by-side table:**
+- Column 1: What we build now (Free Tier / learning constraints)
+- Column 2: What production should look like (HA, reliability, stability — cost is secondary)
+
+This is non-negotiable. Avinash needs to be production-ready, not just "it works on free tier" ready.
+
+**Example format to use (adapt per topic):**
+
+| Component | Learning (Free Tier) | Production (Real Company) |
+|-----------|---------------------|--------------------------|
+| EC2 instance | t2.micro, single AZ | m5.large or c5.xlarge, Multi-AZ |
+| EC2 count | 1 instance | Min 2 behind ALB (Auto Scaling Group) |
+| EBS volume | gp2, 8GB | gp3, 100GB+, daily snapshots |
+| Database | None / SQLite | RDS Multi-AZ, automated backups, read replica |
+| Load Balancer | None | ALB (Application Load Balancer) |
+| Networking | Public subnet only | Private subnets + NAT Gateway + Bastion/VPN |
+| VPC | Single AZ | At least 2 AZs, separate subnets per tier |
+| Jenkins | 1 EC2, no backup | Jenkins on EC2 in ASG or EKS, with EFS for persistence |
+| k8s | minikube locally | EKS, managed node groups, min 3 nodes across 3 AZs |
+| Container Registry | ECR (free 500MB) | ECR with lifecycle policies and replication |
+| Monitoring | CloudWatch basic | Prometheus + Grafana + CloudWatch + PagerDuty alerts |
+| Logs | None / CloudWatch | EFK stack, log retention policies, alerting |
+
+**Key concepts to explain with each comparison:**
+- **HA (High Availability):** Why Multi-AZ? What happens if one AZ goes down?
+- **Fault Tolerance:** What fails gracefully vs cascades?
+- **Auto Scaling:** Why ASG instead of a fixed instance count?
+- **RTO / RPO:** Recovery Time Objective, Recovery Point Objective — what do companies set?
+- **Cost implication:** Rough monthly cost of the production setup vs free tier
+
 ### 📋 Cost Checklist — Before Every `terraform apply`
 
 - [ ] All instances are `t2.micro` or `t3.micro`
