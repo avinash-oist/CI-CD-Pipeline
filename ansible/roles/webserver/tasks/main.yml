@@ -1,4 +1,4 @@
- - name: Install Apache
+- name: Install Apache
    become: true
    ansible.builtin.dnf:
      name: httpd

@@ -1,4 +1,4 @@
- - name: restart httpd
+- name: restart httpd
    become: true
    ansible.builtin.service:
      name: httpd
