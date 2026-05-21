@@ -17,7 +17,7 @@
          // Terraform variables - TF_VAR_* are auto-read by terraform
          // No tfvars file needed in pipeline - values injected via env vars
          TF_VAR_key_pair_name      = 'ci-cd-dev-key'
-         TF_VAR_allowed_ssh_cidrs  = '["13.233.196.180/32","106.51.0.0/16"]'
+         TF_VAR_allowed_ssh_cidrs  = '["13.232.128.91/32","106.51.0.0/16"]'
      }
  
      stages {
