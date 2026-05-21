@@ -3,24 +3,23 @@
    ansible.builtin.dnf:
      name: httpd
      state: present
- 
+
  - name: Configure Apache to listen on port 8080
    become: true
-   ansible.builtin.template:
-     src: httpd.conf.j2
-     dest: /etc/httpd/conf/httpd.conf
-     owner: root
-     group: root
-     mode: '0644'
+   ansible.builtin.lineinfile:
+     path: /etc/httpd/conf/httpd.conf
+     regexp: '^Listen '
+     line: 'Listen {{ webserver_port }}'
+     backup: yes
    notify: restart httpd
- 
+
  - name: Deploy index page
    become: true
    ansible.builtin.copy:
      content: "<h1>Zantac POC - {{ inventory_hostname }}</h1>"
      dest: /var/www/html/index.html
      mode: '0644'
- 
+
  - name: Ensure httpd is enabled and started
    become: true
    ansible.builtin.service:

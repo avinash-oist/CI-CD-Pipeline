@@ -55,12 +55,13 @@
  }
  
  resource "aws_vpc_security_group_ingress_rule" "web_ssh" {
+   for_each          = toset(var.allowed_ssh_cidrs)
    security_group_id = aws_security_group.webserver.id
-   cidr_ipv4         = var.allowed_ssh_cidrs
+   cidr_ipv4         = each.value
    from_port         = 22
    to_port           = 22
    ip_protocol       = "tcp"
-   description       = "SSH from admin IP for Ansible"
+   description       = "SSH from admin/Jenkins"
  }
  
  resource "aws_vpc_security_group_egress_rule" "web_outbound" {
