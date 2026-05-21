@@ -57,8 +57,7 @@ variable "aws_region" {
    description = "Name of the AWS key pair for SSH access"
  }
  
- variable "my_ip" {
-   type        = string
-   description = "Your public IP in CIDR format (e.g. 1.2.3.4/32) for SSH access"
+ variable "allowed_ssh_cidrs" {
+   description = "CIDRs allowed to SSH - your IP + Jenkins EC2 IP"
+   type        = list(string)
  }
-

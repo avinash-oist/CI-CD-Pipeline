@@ -13,6 +13,11 @@
          AWS_DEFAULT_REGION = 'ap-south-1'
          TF_DIR             = 'terraform/environments/dev'
          ANSIBLE_DIR        = 'ansible'
+
+         // Terraform variables - TF_VAR_* are auto-read by terraform
+         // No tfvars file needed in pipeline - values injected via env vars
+         TF_VAR_key_pair_name      = 'ci-cd-dev-key'
+         TF_VAR_allowed_ssh_cidrs  = '["13.233.114.200/32","106.51.0.0/16"]'
      }
  
      stages {

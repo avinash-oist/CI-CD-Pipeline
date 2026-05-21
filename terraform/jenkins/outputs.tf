@@ -10,5 +10,5 @@
  
  output "jenkins_ssh" {
    description = "SSH command to access Jenkins EC2"
-   value       = "ssh -i ~/.ssh/ci-cd-dev-key.pem ec2-user@${aws_instance.jenkins.public_ip}"
+   value       = "ssh -i ~/.ssh/ci-cd-dev-key-fixed.pem ec2-user@${aws_instance.jenkins.public_ip}"
  }

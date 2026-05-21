@@ -62,8 +62,8 @@
      #!/bin/bash
      set -euo pipefail
  
-     # Java 17 - required by Jenkins LTS
-     dnf install -y java-17-amazon-corretto
+     # Java 21 - required by Jenkins LTS 2.463+
+     dnf install -y java-21-amazon-corretto
  
      # Jenkins LTS
      wget -O /etc/yum.repos.d/jenkins.repo \
