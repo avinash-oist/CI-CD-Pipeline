@@ -1,0 +1,7 @@
+# Force LF line endings for files used on Linux (Ansible, shell scripts)
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.sh    text eol=lf
+*.py    text eol=lf
+*.tf    text eol=lf
+*.pem   binary
