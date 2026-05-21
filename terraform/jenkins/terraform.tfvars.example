@@ -1,0 +1,2 @@
+ key_pair_name = "your-key-pair-name"
+ my_ip         = "x.x.x.x/32"

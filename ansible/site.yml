@@ -1,0 +1,7 @@
+ ---
+ - name: Configure Zantac webservers
+   hosts: role_webserver
+   gather_facts: true
+ 
+   roles:
+     - webserver

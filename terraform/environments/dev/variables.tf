@@ -13,7 +13,7 @@ variable "aws_region" {
  variable "project_name" {
    type        = string
    description = "Project name used for resource naming and tagging"
-   default     = "ci-cd-pipeline"
+   default     = "zantac"
  }
  
  variable "vpc_cidr" {
@@ -33,11 +33,23 @@ variable "aws_region" {
    description = "Availability zone for the subnet and EC2"
    default     = "ap-south-1a"
  }
+
+  variable "public_subnet_cidr_b" {
+   type        = string
+   description = "CIDR block for the second public subnet (AZ-b)"
+   default     = "10.0.2.0/24"
+ }
+ 
+ variable "availability_zone_b" {
+   type        = string
+   description = "Second availability zone for subnet B"
+   default     = "ap-south-1b"
+ }
  
  variable "instance_type" {
    type        = string
    description = "EC2 instance type"
-   default     = "t2.micro"
+   default     = "t3.micro"
  }
  
  variable "key_pair_name" {

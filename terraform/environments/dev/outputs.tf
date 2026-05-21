@@ -1,25 +1,45 @@
-
- output "instance_public_ip" {
-   description = "Public IP of the Jenkins EC2 instance"
-   value       = aws_instance.jenkins.public_ip
- }
- 
- output "instance_id" {
-   description = "EC2 instance ID"
-   value       = aws_instance.jenkins.id
- }
- 
  output "vpc_id" {
    description = "VPC ID"
    value       = aws_vpc.main.id
  }
  
- output "public_subnet_id" {
-   description = "Public subnet ID"
+ output "public_subnet_a_id" {
+   description = "Public subnet A (ap-south-1a)"
    value       = aws_subnet.public.id
  }
  
- output "ssh_command" {
-   description = "SSH command to connect to the instance"
-   value       = "ssh -i ~/.ssh/ci-cd-dev-key.pem ec2-user@${aws_instance.jenkins.public_ip}"
+ output "public_subnet_b_id" {
+   description = "Public subnet B (ap-south-1b)"
+   value       = aws_subnet.public_b.id
+ }
+ 
+ output "alb_dns_name" {
+   description = "ALB DNS name - use this to access the web app"
+   value       = aws_lb.main.dns_name
+ }
+ 
+ output "alb_url" {
+   description = "Full URL to access the web application"
+   value       = "http://${aws_lb.main.dns_name}"
+ }
+ 
+ output "asg_name" {
+   description = "Auto Scaling Group name"
+   value       = aws_autoscaling_group.webservers.name
+ }
+ 
+ output "iam_restarter_username" {
+   description = "IAM username for webserver restart only"
+   value       = aws_iam_user.webserver_restarter.name
+ }
+ 
+ output "iam_restarter_access_key_id" {
+   description = "Access key ID for the restarter IAM user"
+   value       = aws_iam_access_key.restarter.id
+ }
+ 
+ output "iam_restarter_secret_key" {
+   description = "Secret access key for the restarter IAM user"
+   value       = aws_iam_access_key.restarter.secret
+   sensitive   = true
  }
