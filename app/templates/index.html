@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Calculator</title>
+     <link rel="stylesheet" href="/static/style.css">
+ </head>
+ <body>
+ 
+ <div class="calculator">
+     <div class="display">
+         <div id="expression"></div>
+         <div id="result">0</div>
+     </div>
+ 
+     <div class="buttons">
+         <button class="btn wide" onclick="clearAll()">C</button>
+         <button class="btn" onclick="deleteLast()">⌫</button>
+         <button class="btn operator" onclick="append('/')">/</button>
+         <button class="btn operator" onclick="append('*')">×</button>
+ 
+         <button class="btn" onclick="append('7')">7</button>
+         <button class="btn" onclick="append('8')">8</button>
+         <button class="btn" onclick="append('9')">9</button>
+         <button class="btn operator" onclick="append('-')">-</button>
+ 
+         <button class="btn" onclick="append('4')">4</button>
+         <button class="btn" onclick="append('5')">5</button>
+         <button class="btn" onclick="append('6')">6</button>
+         <button class="btn operator" onclick="append('+')">+</button>
+ 
+         <button class="btn" onclick="append('1')">1</button>
+         <button class="btn" onclick="append('2')">2</button>
+         <button class="btn" onclick="append('3')">3</button>
+         <button class="btn equals" onclick="calculate()">=</button>
+ 
+         <button class="btn wide" onclick="append('0')">0</button>
+         <button class="btn" onclick="append('.')">.</button>
+     </div>
+ </div>
+ 
+ <script>
+     let expression = "";
+ 
+     function append(value) {
+         expression += value;
+         document.getElementById("expression").textContent = expression;
+     }
+ 
+     function clearAll() {
+         expression = "";
+         document.getElementById("expression").textContent = "";
+         document.getElementById("result").textContent = "0";
+     }
+ 
+     function deleteLast() {
+         expression = expression.slice(0, -1);
+         document.getElementById("expression").textContent = expression;
+     }
+ 
+     function calculate() {
+         fetch("/calculate", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ expression: expression })
+         })
+         .then(response => response.json())
+         .then(data => {
+             document.getElementById("result").textContent = data.result;
+             expression = String(data.result);
+         });
+     }
+ </script>
+ 
+ </body>
+ </html>
